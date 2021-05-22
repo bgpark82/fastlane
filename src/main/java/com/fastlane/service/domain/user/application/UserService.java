@@ -4,7 +4,9 @@ import com.fastlane.service.domain.user.domain.User;
 import com.fastlane.service.domain.user.domain.UserRepository;
 import com.fastlane.service.domain.user.dto.UserRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class UserService {
 
