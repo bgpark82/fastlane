@@ -24,7 +24,7 @@ public class UserStep {
                 .then().log().all().extract();
     }
 
-    public static UserRequest 사용자_생성_스텁() {
-        return UserRequestStub.of("아이디", "비밀번호");
+    public static UserRequest 사용자_생성_스텁(String id, String password) {
+        return UserRequestStub.of(id, password);
     }
 }
