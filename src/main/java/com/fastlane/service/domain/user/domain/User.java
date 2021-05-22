@@ -13,4 +13,10 @@ public class User {
     private String id;
     private String password;
 
+    public static User create(String id, String password) {
+        User user = new User();
+        user.id = id;
+        user.password = password;
+        return user;
+    }
 }
