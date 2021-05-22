@@ -1,13 +1,16 @@
 package com.fastlane.service.domain.user.dto;
 
-import org.springframework.test.util.ReflectionTestUtils;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class UserRequestStub {
 
+    private static final String ID = "id";
+    private static final String PASSWORD = "password";
+
     public static UserRequest of(String id, String password) {
         UserRequest userRequest = new UserRequest();
-        ReflectionTestUtils.setField(userRequest,"id", id);
-        ReflectionTestUtils.setField(userRequest,"password", password);
+        setField(userRequest, ID, id);
+        setField(userRequest,PASSWORD, password);
         return userRequest;
     }
 }
