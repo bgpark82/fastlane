@@ -21,10 +21,6 @@ public class UserStep {
         return 사용자_생성_요청(userRequestStub);
     }
 
-    public static User 사용자_생성_되어_있음(UserRequest userRequestStub) {
-        return 사용자_생성_요청(userRequestStub).as(User.class);
-    }
-
     public static ExtractableResponse<Response> 사용자_생성_요청(UserRequest userRequestStub) {
         return RestAssured
                 .given().log().all()
