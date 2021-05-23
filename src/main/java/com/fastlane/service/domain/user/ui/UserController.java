@@ -3,6 +3,7 @@ package com.fastlane.service.domain.user.ui;
 import com.fastlane.service.domain.user.application.UserService;
 import com.fastlane.service.domain.user.domain.User;
 import com.fastlane.service.domain.user.dto.UserRequest;
+import com.fastlane.service.domain.user.dto.UserResponse;
 import com.fastlane.service.domain.utils.UriUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity find(@PathVariable String id) {
-        return ResponseEntity.ok().build();
+        User user = userService.find(id);
+        return ResponseEntity.ok().body(UserResponse.of(user));
     }
 
     private URI redirectCreateUri(User user) {

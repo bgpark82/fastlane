@@ -40,6 +40,6 @@ public class UserAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 사용자_조회_요청(아이디);
 
         // then
-        사용자_조회_요청_됨(response);
+        사용자_조회_요청_됨(response, 아이디, 비밀번호);
     }
 }

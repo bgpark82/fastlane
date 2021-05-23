@@ -1,7 +1,5 @@
 package com.fastlane.service.domain.user.dto;
 
-import org.springframework.test.util.ReflectionTestUtils;
-
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class UserRequestStub {
