@@ -54,12 +54,9 @@ public class UserAcceptanceTest extends AcceptanceTest {
         사용자_생성_되어_있음(아이디, 비밀번호);
 
         // when
-        ExtractableResponse<Response> response = RestAssured
-                .given().log().all()
-                .when().delete("/api/v1/users/" + 아이디)
-                .then().log().all().extract();
+        ExtractableResponse<Response> response = 사용자_삭제_요청(아이디);
 
         // then
-        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+        사용자_삭제_됨(response);
     }
 }

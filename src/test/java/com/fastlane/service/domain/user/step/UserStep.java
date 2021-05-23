@@ -6,6 +6,7 @@ import com.fastlane.service.domain.user.dto.UserResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.assertj.core.api.Assertions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -30,6 +31,17 @@ public class UserStep {
                 .given().log().all()
                 .when().get(USER_BASE_URI + id)
                 .then().log().all().extract();
+    }
+
+    public static ExtractableResponse<Response> 사용자_삭제_요청(String id) {
+        return RestAssured
+                .given().log().all()
+                .when().delete("/api/v1/users/" + id)
+                .then().log().all().extract();
+    }
+
+    public static void 사용자_삭제_됨(ExtractableResponse<Response> response) {
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 
     public static void 사용자_생성_됨(ExtractableResponse<Response> response) {
