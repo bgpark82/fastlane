@@ -17,6 +17,6 @@ public class UserService {
     }
 
     public User find(String id) {
-        return null;
+        return userRepository.findById(id).get();
     }
 }
