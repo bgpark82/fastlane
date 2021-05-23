@@ -1,11 +1,14 @@
 package com.fastlane.service.domain.user.acceptance;
 
 import com.fastlane.service.domain.common.AcceptanceTest;
+import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 
 import static com.fastlane.service.domain.user.step.UserStep.*;
 
@@ -41,5 +44,21 @@ public class UserAcceptanceTest extends AcceptanceTest {
 
         // then
         사용자_조회_요청_됨(response, 아이디, 비밀번호);
+    }
+
+    @DisplayName("사용자를 삭제한다")
+    @Test
+    void delete() {
+        // given
+        사용자_생성_되어_있음(아이디, 비밀번호);
+
+        // when
+        ExtractableResponse<Response> response = RestAssured
+                .given().log().all()
+                .when().delete("/api/v1/users/" + 아이디)
+                .then().log().all().extract();
+
+        // then
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }
