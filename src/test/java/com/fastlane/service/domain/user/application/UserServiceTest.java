@@ -38,12 +38,10 @@ class UserServiceTest {
     @Test
     void save() {
         // given
-        UserRequest userRequestStub = 사용자_요청_스텁(아이디, 비밀번호);
-        User savedUser = User.create(아이디, 비밀번호);
-        when(userRepository.save(any())).thenReturn(savedUser);
+        when(userRepository.save(any())).thenReturn(User.create(아이디, 비밀번호));
 
         // when
-        User user = userService.save(userRequestStub);
+        User user = userService.save(사용자_요청_스텁(아이디, 비밀번호));
 
         // then
         assertThat(user.getId()).isEqualTo(아이디);
@@ -54,8 +52,8 @@ class UserServiceTest {
     @Test
     void find() {
         // given
-        User findUser = User.create(아이디, 비밀번호);
-        when(userRepository.findById(any())).thenReturn(Optional.of(findUser));
+        when(userRepository.findById(any()))
+                .thenReturn(Optional.of(User.create(아이디, 비밀번호)));
 
         // when
         User user = userService.find(아이디);
@@ -69,12 +67,11 @@ class UserServiceTest {
     @Test
     void changePassword() {
         // given
-        User findUser = User.create(아이디, 비밀번호);
-        when(userRepository.findById(any())).thenReturn(Optional.of(findUser));
-        PasswordRequest newPassword = 비밀번호_요청_스텁(수정_비밀번호);
+        when(userRepository.findById(any()))
+                .thenReturn(Optional.of(User.create(아이디, 비밀번호)));
 
         // when
-        User user = userService.changePassword(아이디, newPassword);
+        User user = userService.changePassword(아이디, 비밀번호_요청_스텁(수정_비밀번호));
 
         // then
         assertThat(user.getId()).isEqualTo(아이디);
