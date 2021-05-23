@@ -32,6 +32,11 @@ public class UserController {
         return ResponseEntity.ok().body(UserResponse.of(user));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable String id) {
+        return ResponseEntity.noContent().build();
+    }
+
     private URI redirectCreateUri(User user) {
         return UriUtil.redirectUri(USER_CREATE_FORMATTER, user.getId());
     }

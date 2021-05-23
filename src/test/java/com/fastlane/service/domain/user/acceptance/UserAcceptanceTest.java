@@ -19,6 +19,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
 
     @BeforeEach
     void setUp() {
+        super.setting();
         아이디 = "아이디";
         비밀번호 = "비밀번호";
     }

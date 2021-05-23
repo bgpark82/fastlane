@@ -12,7 +12,7 @@ public class AcceptanceTest {
     int port;
 
     @BeforeEach
-    void setUp() {
+    protected void setting() {
         RestAssured.port = port;
     }
 }
