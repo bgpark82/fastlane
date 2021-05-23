@@ -1,7 +1,6 @@
 package com.fastlane.service.domain.user.acceptance;
 
 import com.fastlane.service.domain.common.AcceptanceTest;
-import com.fastlane.service.domain.user.dto.PasswordRequest;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;

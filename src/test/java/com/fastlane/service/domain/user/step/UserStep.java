@@ -17,6 +17,7 @@ public class UserStep {
         UserRequest userRequestStub = 사용자_요청_스텁(id, password);
         return RestAssured
                 .given().log().all()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
                 .body(userRequestStub)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when().post(USER_BASE_URI)
