@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+
+import java.util.HashMap;
 
 import static com.fastlane.service.domain.user.step.UserStep.*;
 
@@ -58,5 +61,26 @@ public class UserAcceptanceTest extends AcceptanceTest {
 
         // then
         사용자_삭제_됨(response);
+    }
+
+    @DisplayName("비밀번호를 변경한다")
+    @Test
+    void changePassword() {
+        // given
+        사용자_생성_되어_있음(아이디, 비밀번호);
+        HashMap<String, String> request = new HashMap<>();
+        request.put("password","비밀번호2");
+
+        // when
+        ExtractableResponse<Response> response = RestAssured
+                .given().log().all()
+                .body(request)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().patch("/api/v1/users/" + 아이디)
+                .then().log().all().extract();
+
+        // then
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+
     }
 }

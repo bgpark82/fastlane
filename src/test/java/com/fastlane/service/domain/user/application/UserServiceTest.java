@@ -12,8 +12,7 @@ import java.util.Optional;
 import static com.fastlane.service.domain.user.step.UserStep.사용자_요청_스텁;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @DisplayName("사용자 관련 서비스 테스트")
 class UserServiceTest {
