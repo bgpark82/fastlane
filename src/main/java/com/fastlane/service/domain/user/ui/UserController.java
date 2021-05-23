@@ -2,6 +2,7 @@ package com.fastlane.service.domain.user.ui;
 
 import com.fastlane.service.domain.user.application.UserService;
 import com.fastlane.service.domain.user.domain.User;
+import com.fastlane.service.domain.user.dto.PasswordRequest;
 import com.fastlane.service.domain.user.dto.UserRequest;
 import com.fastlane.service.domain.user.dto.UserResponse;
 import com.fastlane.service.domain.utils.UriUtil;
@@ -27,9 +28,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity find(@PathVariable String id) {
+    public ResponseEntity find(@PathVariable String id, @RequestBody PasswordRequest request) {
         User user = userService.find(id);
         return ResponseEntity.ok().body(UserResponse.of(user));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity changePassword(@PathVariable String id) {
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
