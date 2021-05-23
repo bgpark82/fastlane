@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 import static com.fastlane.service.domain.user.step.UserStep.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("사용자 관련 인수 테스트")
 public class UserAcceptanceTest extends AcceptanceTest {
@@ -52,6 +53,6 @@ public class UserAcceptanceTest extends AcceptanceTest {
                 .then().log().all().extract();
 
         // then
-        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 }

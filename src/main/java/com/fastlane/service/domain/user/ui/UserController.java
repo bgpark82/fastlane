@@ -6,10 +6,7 @@ import com.fastlane.service.domain.user.dto.UserRequest;
 import com.fastlane.service.domain.utils.UriUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -26,6 +23,11 @@ public class UserController {
     public ResponseEntity save(@RequestBody UserRequest request) {
         User user = userService.save(request);
         return ResponseEntity.created(redirectCreateUri(user)).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity find(@PathVariable Long id) {
+        return ResponseEntity.ok().build();
     }
 
     private URI redirectCreateUri(User user) {

@@ -1,6 +1,5 @@
 package com.fastlane.service.domain.user.step;
 
-import com.fastlane.service.domain.user.domain.User;
 import com.fastlane.service.domain.user.dto.UserRequest;
 import com.fastlane.service.domain.user.dto.UserRequestStub;
 import io.restassured.RestAssured;
@@ -16,6 +15,10 @@ public class UserStep {
 
     public static void 사용자_생성_됨(ExtractableResponse<Response> response) {
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    public static ExtractableResponse<Response> 사용자_생성_되어_있음(UserRequest userRequestStub) {
+        return 사용자_생성_요청(userRequestStub);
     }
 
     public static User 사용자_생성_되어_있음(UserRequest userRequestStub) {
