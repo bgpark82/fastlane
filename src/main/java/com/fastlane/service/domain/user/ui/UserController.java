@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity find(@PathVariable Long id) {
+    public ResponseEntity find(@PathVariable String id) {
         return ResponseEntity.ok().build();
     }
 

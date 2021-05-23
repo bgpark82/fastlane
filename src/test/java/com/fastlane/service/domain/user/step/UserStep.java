@@ -9,25 +9,39 @@ import org.assertj.core.api.Assertions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class UserStep {
 
     private static final String USER_BASE_URI = "/api/v1/users";
 
-    public static void 사용자_생성_됨(ExtractableResponse<Response> response) {
-        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-    }
-
-    public static ExtractableResponse<Response> 사용자_생성_되어_있음(UserRequest userRequestStub) {
-        return 사용자_생성_요청(userRequestStub);
-    }
-
-    public static ExtractableResponse<Response> 사용자_생성_요청(UserRequest userRequestStub) {
+    public static ExtractableResponse<Response> 사용자_생성_요청(String id, String password) {
+        UserRequest userRequestStub = 사용자_요청_스텁(id, password);
         return RestAssured
                 .given().log().all()
                 .body(userRequestStub)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when().post(USER_BASE_URI)
                 .then().log().all().extract();
+    }
+
+    public static ExtractableResponse<Response> 사용자_조회_요청(String id) {
+        return RestAssured
+                .given().log().all()
+                .when().get(USER_BASE_URI + id)
+                .then().log().all().extract();
+    }
+
+    public static void 사용자_생성_됨(ExtractableResponse<Response> response) {
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    public static void 사용자_조회_요청_됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    public static ExtractableResponse<Response> 사용자_생성_되어_있음(String id, String password) {
+        return 사용자_생성_요청(id, password);
     }
 
     public static UserRequest 사용자_요청_스텁(String id, String password) {
