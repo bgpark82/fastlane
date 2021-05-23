@@ -13,14 +13,14 @@ import static com.fastlane.service.domain.user.step.UserStep.*;
 @DisplayName("사용자 관련 인수 테스트")
 public class UserAcceptanceTest extends AcceptanceTest {
 
-    String 아이디, 비밀번호, 수정_비밀번호;
+    String 아이디, 비밀번호, 새_비밀번호;
 
     @BeforeEach
     void setUp() {
         super.setting();
         아이디 = "아이디";
         비밀번호 = "비밀번호";
-        수정_비밀번호 = "비밀번호2";
+        새_비밀번호 = "비밀번호2";
     }
 
     @DisplayName("사용자를 등록한다")
@@ -63,12 +63,11 @@ public class UserAcceptanceTest extends AcceptanceTest {
     void changePassword() {
         // given
         사용자_생성_되어_있음(아이디, 비밀번호);
-        PasswordRequest 비밀번호_요청_스텁 = 비밀번호_요청_스텁(수정_비밀번호);
 
         // when
-        ExtractableResponse<Response> response = 비밀번호_수정_요청(비밀번호_요청_스텁, 아이디);
+        ExtractableResponse<Response> response = 비밀번호_수정_요청(새_비밀번호, 아이디);
 
         // then
-        비밀번호_수정_됨(response);
+        비밀번호_수정_됨(response, 새_비밀번호);
     }
 }

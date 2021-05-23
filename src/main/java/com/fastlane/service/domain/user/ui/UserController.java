@@ -28,14 +28,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity find(@PathVariable String id, @RequestBody PasswordRequest request) {
+    public ResponseEntity find(@PathVariable String id) {
         User user = userService.find(id);
         return ResponseEntity.ok().body(UserResponse.of(user));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity changePassword(@PathVariable String id) {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity changePassword(@PathVariable String id, @RequestBody PasswordRequest request) {
+        User user = userService.changePassword(id, request);
+        return ResponseEntity.ok().body(user);
     }
 
     @DeleteMapping("/{id}")
