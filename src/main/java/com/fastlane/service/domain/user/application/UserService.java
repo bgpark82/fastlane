@@ -2,6 +2,7 @@ package com.fastlane.service.domain.user.application;
 
 import com.fastlane.service.domain.user.domain.User;
 import com.fastlane.service.domain.user.domain.UserRepository;
+import com.fastlane.service.domain.user.dto.PasswordRequest;
 import com.fastlane.service.domain.user.dto.UserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class UserService {
 
     public void delete(String id) {
         userRepository.deleteById(id);
+    }
+
+    public User changePassword(String 아이디, PasswordRequest newPassword) {
+        return null;
     }
 }
