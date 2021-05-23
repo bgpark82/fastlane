@@ -1,8 +1,6 @@
 package com.fastlane.service.domain.user.step;
 
-import com.fastlane.service.domain.user.dto.UserRequest;
-import com.fastlane.service.domain.user.dto.UserRequestStub;
-import com.fastlane.service.domain.user.dto.UserResponse;
+import com.fastlane.service.domain.user.dto.*;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -40,6 +38,20 @@ public class UserStep {
                 .then().log().all().extract();
     }
 
+    public static ExtractableResponse<Response> 비밀번호_수정_요청(PasswordRequest request, String id) {
+        return RestAssured
+                .given().log().all()
+                .body(request)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().patch("/api/v1/users/" + id)
+                .then().log().all().extract();
+    }
+
+
+    public static void 비밀번호_수정_됨(ExtractableResponse<Response> response) {
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+    }
+
     public static void 사용자_삭제_됨(ExtractableResponse<Response> response) {
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
@@ -61,5 +73,9 @@ public class UserStep {
 
     public static UserRequest 사용자_요청_스텁(String id, String password) {
         return UserRequestStub.of(id, password);
+    }
+
+    public static PasswordRequest 비밀번호_요청_스텁(String password) {
+        return PasswordRequestStub.of(password);
     }
 }
