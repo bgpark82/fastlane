@@ -19,4 +19,8 @@ public class User {
         user.password = password;
         return user;
     }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }
