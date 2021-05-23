@@ -15,4 +15,8 @@ public class UserService {
     public User save(UserRequest request) {
         return userRepository.save(request.toEntity());
     }
+
+    public User find(String id) {
+        return null;
+    }
 }

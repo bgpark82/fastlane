@@ -25,7 +25,7 @@ class UserServiceTest {
         userService = new UserService(userRepository);
     }
 
-    @DisplayName("사용자를 생성한다.")
+    @DisplayName("사용자를 생성한다")
     @Test
     void save() {
         // given
@@ -35,6 +35,21 @@ class UserServiceTest {
 
         // when
         User user = userService.save(userRequestStub);
+
+        // then
+        assertThat(user.getId()).isEqualTo("아이디");
+        assertThat(user.getPassword()).isEqualTo("비밀번호");
+    }
+
+    @DisplayName("사용자를 조회한다")
+    @Test
+    void find() {
+        // given
+        User savedUser = User.create("아이디", "비밀번호");
+        when(userRepository.save(any())).thenReturn(savedUser);
+
+        // when
+        User user = userService.find("아이디");
 
         // then
         assertThat(user.getId()).isEqualTo("아이디");
